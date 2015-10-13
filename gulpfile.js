@@ -35,7 +35,7 @@ var paths = {
         root: "dev"
     },
 
-    watch: "src/**/*"
+    watch: ["src/**/*", "vendor/**/*"]
 
     //images: {
     //}
@@ -54,6 +54,7 @@ var buildTask = function(options) {
   return gulp.src(options.src)
     .pipe(postcss(processors))
     .pipe(gulpif(options.banner, header(banner, { pkg : pkg } )))
+    .pipe(gulpif(options.prod, rename({ basename: pkg.name })))
     .pipe(gulp.dest(options.dest))
     .pipe(gulpif(options.minify, rename({
       extname: ".min.css"
@@ -62,7 +63,7 @@ var buildTask = function(options) {
     .pipe(gulpif(options.minify, gulp.dest(options.dest)))
 }
 
-var copyHTML = function(options) {
+var copy = function(options) {
   return gulp.src(options.src)
     .pipe(gulp.dest(options.dest))
 }
@@ -76,7 +77,7 @@ function setLiveReload () {
     // if we have a RELOAD thing set, use that
     // otherwise default to true
     if (process.env.RELOAD) {
-        return process.env.RELOAD === "true" ? true : false 
+        return process.env.RELOAD === "true" ? true : false
     } else {
         return true
     }
@@ -108,9 +109,14 @@ gulp.task('dev', function() {
     dest: paths.css.dev,
   })
 
-  copyHTML({
+  copy({
     src: paths.html.src,
     dest: paths.html.dev
+  })
+
+  copy({
+      src: "node_modules/normalize.css/normalize.css",
+      dest: "dev/css/vendor"
   })
 
   //copyImages({
@@ -120,7 +126,7 @@ gulp.task('dev', function() {
 })
 
 gulp.task('reload', function () {
-    gulp.src(paths.serve.root)
+    gulp.src(paths.serve.root) // this just watches the dev dir for changes and hits the reload button
         .pipe(gConn.reload())
 })
 
@@ -129,6 +135,7 @@ gulp.task('prod', function() {
     src: paths.css.src,
     banner: true,
     minify: true,
+    prod: true,
     cssmin: {
       advanced: true,
       aggressiveMerging: true,
