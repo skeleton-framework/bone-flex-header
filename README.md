@@ -1,9 +1,9 @@
 # Bone Template
 
-__ The head bone is connected to the __
-__ nav bone __
-__ the nav bone is connected to the __
-__ ... __
+    The head bone is connected to the
+    nav bone
+    the nav bone is connected to the
+    ...
 
 Use this as a jumping off point for making your own responsive, Skeleton aware
 UI component. Code once, reuse reuse reuse.
