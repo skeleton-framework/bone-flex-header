@@ -23,9 +23,12 @@
     "gulp-postcss": "^6.0.1",
     "gulp-rename": "^1.2.2",
     "moment": "^2.10.6",
+    "normalize.css": "^3.0.3",
     "postcss": "^5.0.9",
     "postcss-calc": "^5.0.0",
     "postcss-custom-properties": "^5.0.0",
     "postcss-import": "^7.0.0"
+  },
+  "dependencies": {
   }
 }
