@@ -1,8 +1,8 @@
 # Bone Template
 
     The head bone is connected to the
-    nav bone
-    the nav bone is connected to the
+    Nav bone
+    The nav bone is connected to the
     ...
 
 Use this as a jumping off point for making your own responsive, Skeleton aware
