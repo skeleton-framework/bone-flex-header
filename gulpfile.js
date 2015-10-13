@@ -119,6 +119,11 @@ gulp.task('dev', function() {
       dest: "dev/css/vendor"
   })
 
+  copy({
+    src: "vendor/css/skeleton.css",
+    dest: "dev/css/vendor"
+  })
+
   //copyImages({
     //src: paths.images.src,
     //dest: paths.images.dev
