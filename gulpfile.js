@@ -1,14 +1,12 @@
-var gulp        = require('gulp')
-var gulpif      = require('gulp-if')
-var postcss     = require('gulp-postcss')
-var cssmin      = require('gulp-cssmin')
-var rename      = require('gulp-rename')
+var gulp = require('gulp')
+var gulpif = require('gulp-if')
+var postcss = require('gulp-postcss')
+var cssmin = require('gulp-cssmin')
+var rename = require('gulp-rename')
 
-var gConn       = require("gulp-connect")
-
-var header      = require('gulp-header')
-var moment      = require('moment')
-var pkg         = require('./package.json')
+var header = require('gulp-header')
+var moment = require('moment')
+var pkg = require('./package.json')
 
 var banner = ['/*!',
   ' Skeleton Framework - Bone Template', // Rename me
@@ -20,25 +18,20 @@ var banner = ['/*!',
 ].join('')
 
 var paths = {
-    css: {
-        src: "src/bone.css",
-        dist: "dist",
-        dev: "dev/css/vendor"
-    },
-
-    html: {
-        src: "src/index.html",
-        dev: "dev"
-    },
-
-    serve: {
-        root: "dev"
-    },
-
-    watch: ["src/**/*", "vendor/**/*"]
-
-    //images: {
-    //}
+  css: {
+    src: './src/bone.css',
+    dist: './dist',
+    dev: './dev/css'
+  },
+  html: {
+    src: './src/test.html',
+    dev: './dev/'
+  },
+//  images: {
+//    src: './src/images/favicon.png',
+//    dev: './dev/images'
+//  },
+  watch: './src/**/*'
 }
 
 var processors = [
@@ -47,14 +40,14 @@ var processors = [
   require('postcss-calc')({
     precision: 10
   }),
-  require('autoprefixer')()
+  require('autoprefixer-core')()
 ]
 
 var buildTask = function(options) {
   return gulp.src(options.src)
     .pipe(postcss(processors))
     .pipe(gulpif(options.banner, header(banner, { pkg : pkg } )))
-    .pipe(gulpif(options.prod, rename({ basename: pkg.name })))
+    .pipe(gulpif(options.pkgname, rename({ basename: pkg.name })))
     .pipe(gulp.dest(options.dest))
     .pipe(gulpif(options.minify, rename({
       extname: ".min.css"
@@ -63,43 +56,15 @@ var buildTask = function(options) {
     .pipe(gulpif(options.minify, gulp.dest(options.dest)))
 }
 
-var copy = function(options) {
+var copyHTML = function(options) {
   return gulp.src(options.src)
     .pipe(gulp.dest(options.dest))
 }
 
 //var copyImages = function(options) {
-  //return gulp.src(options.src)
-    //.pipe(gulp.dest(options.dest))
+//  return gulp.src(options.src)
+//    .pipe(gulp.dest(options.dest))
 //}
-
-function setLiveReload () {
-    // if we have a RELOAD thing set, use that
-    // otherwise default to true
-    if (process.env.RELOAD) {
-        return process.env.RELOAD === "true" ? true : false
-    } else {
-        return true
-    }
-}
-
-var useLiveReload = setLiveReload()
-
-gulp.task("serve", function () {
-    gConn.server({
-            root: paths.serve.root,
-            port: process.env.PORT || 3000,
-            livereload: useLiveReload
-    })
-})
-
-gulp.task('watch', function() {
-  gulp.watch(paths.watch, ['dev'])
-
-  if (useLiveReload)
-      gulp.watch(paths.watch, ['reload'])
-})
-
 
 gulp.task('dev', function() {
   buildTask({
@@ -108,31 +73,18 @@ gulp.task('dev', function() {
     minify: false,
     dest: paths.css.dev,
   })
-
-  copy({
+  copyHTML({
     src: paths.html.src,
     dest: paths.html.dev
   })
-
-  copy({
-      src: "node_modules/normalize.css/normalize.css",
-      dest: "dev/css/vendor"
-  })
-
-  copy({
-    src: "vendor/css/skeleton.css",
-    dest: "dev/css/vendor"
-  })
-
-  //copyImages({
-    //src: paths.images.src,
-    //dest: paths.images.dev
-  //})
+//  copyImages({
+//    src: paths.images.src,
+//    dest: paths.images.dev
+//  })
 })
 
-gulp.task('reload', function () {
-    gulp.src(paths.serve.root) // this just watches the dev dir for changes and hits the reload button
-        .pipe(gConn.reload())
+gulp.task('watch', function() {
+  gulp.watch(paths.watch, ['dev'])
 })
 
 gulp.task('prod', function() {
@@ -140,7 +92,7 @@ gulp.task('prod', function() {
     src: paths.css.src,
     banner: true,
     minify: true,
-    prod: true,
+    pkgname: true,
     cssmin: {
       advanced: true,
       aggressiveMerging: true,
@@ -156,4 +108,4 @@ gulp.task('prod', function() {
   })
 })
 
-gulp.task('default', ['dev', 'watch', 'serve'])
+gulp.task('default', ['dev', 'watch'])

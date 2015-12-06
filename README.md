@@ -5,19 +5,14 @@
     The nav bone is connected to the
     ...
 
-Use this as a jumping off point for making your own responsive, Skeleton aware
+Use this as a starting point for making your own responsive, Skeleton aware
 UI component. Code once, reuse reuse reuse.
-
-## What do?
 
 ### Develop
 
-    npm install
-    gulp
-
-Triggineg the default `gulp` task will cause gulp to run all the css in
+Triggering the default `gulp` task will cause gulp to run all the css in
 the `src/` dir through some `postcss` processors and crap it out into `dev`.
-It will also copy over `src/index.html`, whic you can use as a lab/sandbox for
+It will also copy over `src/index.html`, which you can use as a lab/sandbox for
 your component.
 
 Copying over some javascript is still on the todo list.
@@ -45,13 +40,3 @@ Invoking `gulp prod` from the command line will trigger the production build pro
 ### Serve it on a different port
 
     PORT=9001 gulp
-
-This boilerplate should pull in the newest version of `normalize.css` and the
-current stable relase of Skeleton.
-
-## TODO
-
-But on that last point, it doesn't yet. Currently, Skeleton is kept in `vendor/css`,
-kept up to date by hand.  Working on that via getting an NPM package put together.
-
-Noramlize in this project is kept up to date via the `normalize.css` NPM package.
