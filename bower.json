@@ -1,0 +1,28 @@
+{
+  "name": "bone-template",
+  "description": "A simple responsive framework for mobile friendly development.",
+  "main": "dist/skeleton.css",
+  "author": "your name here",
+  "license": "MIT",
+  "keywords": [
+    "css",
+    "framework",
+    "skeleton",
+    "skeletonframework",
+    "bone"
+  ],
+  "homepage": "https://github.com/skeletonframework/bone-template",
+  "dependencies": {
+    "normalize-css": "~3.0.3",
+    "skeletonframework": "~1.0.3"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "gulpfile.js",
+    "package.json",
+    "README.md"
+  ]
+}
