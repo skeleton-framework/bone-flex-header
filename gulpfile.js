@@ -48,7 +48,6 @@ var paths = {
   },
 
   watch: ["src/**/*", "dev/**/*"]
-
 }
 
 var processors = [
@@ -63,12 +62,8 @@ var processors = [
 var buildTask = function (options) {
   return gulp.src(options.src)
     .pipe(postcss(processors))
-    .pipe(gulpif(options.banner, header(banner, {
-      pkg: pkg
-    })))
-    .pipe(gulpif(options.prod, rename({
-      basename: pkg.name
-    })))
+    .pipe(gulpif(options.banner, header(banner, { pkg : pkg } )))
+    .pipe(gulpif(options.pkgname, rename({ basename: pkg.name })))
     .pipe(gulp.dest(options.dest))
     .pipe(gulpif(options.minify, rename({
       extname: ".min.css"
@@ -139,8 +134,8 @@ gulp.task('dev', function () {
   //})
 
   //copyJS({
-  //  src: paths.images.src,
-  //  dest: paths.images.dev
+  //  src: paths.js.src,
+  //  dest: paths.js.dev
   //})
 })
 
@@ -154,7 +149,7 @@ gulp.task('prod', function () {
     src: paths.css.src,
     banner: true,
     minify: true,
-    prod: true,
+    pkgname: true,
     cssmin: {
       advanced: true,
       aggressiveMerging: true,

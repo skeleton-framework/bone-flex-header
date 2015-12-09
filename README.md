@@ -18,16 +18,15 @@ In the project root folder run `npm install` to install the local dependencies.
 #### gulp:
 * `gulp dev` - Creates a development build of your bone.
 * `gulp watch` - Watches the source files and runs `gulp dev` on file change.
-* `gulp prod` - Creates the production ready, minified and non-minified versions of your bone.
+* `gulp dist` - Creates the production ready, minified and non-minified versions of your bone.
 
 #### npm:
-* `npm run dev` - Creates a development build of Skeleton Framework.
-* `npm run watch` - Watches the source files and uses local copy of gulp to run `gulp dev` on file change.
-* `npm run prod` - Creates the production ready, minified and non-minified versions of Skeleton Framework.
+* `npm run dev` - Same as `gulp dev`.
+* `npm run watch` - Same as `gulp watch`.
+* `npm run dist` - Smae ass `gulp dist`.
 
 The default `gulp` task will run all the css in the `src` dir through some `postcss` processors and compile it into `dev`.
 It will also copy over `src/test.html`, which you can use as a lab/sandbox for
-your component.
 
 `gulp-connect` will then serve it at [localhost:3000](http://localhost:3000).
 
@@ -49,7 +48,7 @@ your component.
 
 ### Ship
 
-Invoking `gulp prod` from the command line will trigger the production build process:
+Invoking `gulp dist` from the command line will trigger the production build process:
 
 1. Preprocess your Bone files with `postcss`
 2. Minify
