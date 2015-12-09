@@ -1,44 +1,54 @@
-var gulp        = require('gulp')
-var gulpif      = require('gulp-if')
-var postcss     = require('gulp-postcss')
-var cssmin      = require('gulp-cssmin')
-var rename      = require('gulp-rename')
+var gulp = require('gulp')
+var gulpif = require('gulp-if')
+var postcss = require('gulp-postcss')
+var cssmin = require('gulp-cssmin')
+var rename = require('gulp-rename')
 
-var gConn       = require("gulp-connect")
+var gConn = require("gulp-connect")
 
-var header      = require('gulp-header')
-var moment      = require('moment')
-var pkg         = require('./package.json')
+var header = require('gulp-header')
+var moment = require('moment')
+var pkg = require('./package.json')
 
 var banner = ['/*!',
   ' Skeleton Framework - Bone Template', // Rename me
   ' | v<%= pkg.version %>',
   ' | <%= pkg.license %>',
-  ' | '+ moment().format("MMM Do, YYYY"),
+  ' | ' + moment().format("MMM Do, YYYY"),
   ' */',
   '\n \n'
 ].join('')
 
 var paths = {
-    css: {
-        src: "src/bone.css",
-        dist: "dist",
-        dev: "dev/css/vendor"
-    },
+  css: {
+    src: "src/bone.css",
+    dist: "dist",
+    dev: "dev/css"
+  },
 
-    html: {
-        src: "src/index.html",
-        dev: "dev"
-    },
+  //js: {
+  //  src: "src/bone.js",
+  //  dist: "dist",
+  //  dev: "dev/js"
+  //},
 
-    serve: {
-        root: "dev"
-    },
+  html: {
+    src: "src/test.html",
+    dev: "dev"
+  },
 
-    watch: ["src/**/*", "vendor/**/*"]
+  //images: {
+  //  src: "src/images/*",
+  //  dist: "dist/images",
+  //  dev: "dev/images"
+  //},
 
-    //images: {
-    //}
+  serve: {
+    root: "dev"
+  },
+
+  watch: ["src/**/*", "dev/**/*"]
+
 }
 
 var processors = [
@@ -47,14 +57,18 @@ var processors = [
   require('postcss-calc')({
     precision: 10
   }),
-  require('autoprefixer')()
+  require('autoprefixer-core')()
 ]
 
-var buildTask = function(options) {
+var buildTask = function (options) {
   return gulp.src(options.src)
     .pipe(postcss(processors))
-    .pipe(gulpif(options.banner, header(banner, { pkg : pkg } )))
-    .pipe(gulpif(options.prod, rename({ basename: pkg.name })))
+    .pipe(gulpif(options.banner, header(banner, {
+      pkg: pkg
+    })))
+    .pipe(gulpif(options.prod, rename({
+      basename: pkg.name
+    })))
     .pipe(gulp.dest(options.dest))
     .pipe(gulpif(options.minify, rename({
       extname: ".min.css"
@@ -63,45 +77,50 @@ var buildTask = function(options) {
     .pipe(gulpif(options.minify, gulp.dest(options.dest)))
 }
 
-var copy = function(options) {
+var copy = function (options) {
   return gulp.src(options.src)
     .pipe(gulp.dest(options.dest))
 }
 
-//var copyImages = function(options) {
-  //return gulp.src(options.src)
-    //.pipe(gulp.dest(options.dest))
-//}
+var copyImages = function (options) {
+  return gulp.src(options.src)
+    .pipe(gulp.dest(options.dest))
+}
 
-function setLiveReload () {
-    // if we have a RELOAD thing set, use that
-    // otherwise default to true
-    if (process.env.RELOAD) {
-        return process.env.RELOAD === "true" ? true : false
-    } else {
-        return true
-    }
+// TODO: build minified js in dist. For now copy over js unminified.
+var copyJS = function (options) {
+  return gulp.src(options.src)
+    .pipe(gulp.dest(options.dest))
+}
+
+function setLiveReload() {
+  // if we have a RELOAD thing set, use that
+  // otherwise default to false
+  if (process.env.RELOAD) {
+    return process.env.RELOAD === "true" ? true : false
+  } else {
+    return false
+  }
 }
 
 var useLiveReload = setLiveReload()
 
 gulp.task("serve", function () {
-    gConn.server({
-            root: paths.serve.root,
-            port: process.env.PORT || 3000,
-            livereload: useLiveReload
-    })
+  gConn.server({
+    root: paths.serve.root,
+    port: process.env.PORT || 3000,
+    livereload: useLiveReload
+  })
 })
 
-gulp.task('watch', function() {
+gulp.task('watch', function () {
   gulp.watch(paths.watch, ['dev'])
 
   if (useLiveReload)
-      gulp.watch(paths.watch, ['reload'])
+    gulp.watch(paths.watch, ['reload'])
 })
 
-
-gulp.task('dev', function() {
+gulp.task('dev', function () {
   buildTask({
     src: paths.css.src,
     banner: false,
@@ -109,33 +128,28 @@ gulp.task('dev', function() {
     dest: paths.css.dev,
   })
 
-  copy({
+  copyHTML({
     src: paths.html.src,
     dest: paths.html.dev
   })
 
-  copy({
-      src: "node_modules/normalize.css/normalize.css",
-      dest: "dev/css/vendor"
-  })
-
-  copy({
-    src: "vendor/css/skeleton.css",
-    dest: "dev/css/vendor"
-  })
-
   //copyImages({
-    //src: paths.images.src,
-    //dest: paths.images.dev
+  //  src: paths.images.src,
+  //  dest: paths.images.dev
+  //})
+
+  //copyJS({
+  //  src: paths.images.src,
+  //  dest: paths.images.dev
   //})
 })
 
 gulp.task('reload', function () {
-    gulp.src(paths.serve.root) // this just watches the dev dir for changes and hits the reload button
-        .pipe(gConn.reload())
+  gulp.src(paths.serve.root) // this just watches the dev dir for changes and hits the reload button
+    .pipe(gConn.reload())
 })
 
-gulp.task('prod', function() {
+gulp.task('prod', function () {
   buildTask({
     src: paths.css.src,
     banner: true,

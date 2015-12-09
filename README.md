@@ -5,29 +5,47 @@
     The nav bone is connected to the
     ...
 
-Use this as a jumping off point for making your own responsive, Skeleton aware
-UI component. Code once, reuse reuse reuse.
-
-## What do?
+Use this as a starting point for making your own responsive, Skeleton aware UI component. Code once, reuse reuse reuse.
 
 ### Develop
 
-    npm install
-    gulp
+#### Install Development Dependencies
+`npm install --global gulp` 
+This is optional, as npm can build your bone for you.
 
-Triggineg the default `gulp` task will cause gulp to run all the css in
-the `src/` dir through some `postcss` processors and crap it out into `dev`.
-It will also copy over `src/index.html`, whic you can use as a lab/sandbox for
+In the project root folder run `npm install` to install the local dependencies.
+
+#### gulp:
+* `gulp dev` - Creates a development build of your bone.
+* `gulp watch` - Watches the source files and runs `gulp dev` on file change.
+* `gulp prod` - Creates the production ready, minified and non-minified versions of your bone.
+
+#### npm:
+* `npm run dev` - Creates a development build of Skeleton Framework.
+* `npm run watch` - Watches the source files and uses local copy of gulp to run `gulp dev` on file change.
+* `npm run prod` - Creates the production ready, minified and non-minified versions of Skeleton Framework.
+
+The default `gulp` task will run all the css in the `src` dir through some `postcss` processors and compile it into `dev`.
+It will also copy over `src/test.html`, which you can use as a lab/sandbox for
 your component.
 
-Copying over some javascript is still on the todo list.
+`gulp-connect` will then serve it at [localhost:3000](http://localhost:3000).
 
-`gulp-connect` will then serve it at [localhost:3000](http://localhost:3000)
-with `livereload` enabled, so go get a plugin for your browser if you want.
+#### Turn on livereload
 
-`livereload` will reload on changes to the contents `dev`, and `gulp` will rerun
-the build process on changes to `src`.
+    RELOAD=true gulp
 
+#### Serve it on a different port
+    
+    PORT=9001 gulp
+    
+#### Use livereolad and a different port
+
+    RELOAD=true PORT=9001 gulp
+    
+`gulp-connect` will then serve your bone with `livereload` enabled, so go get a plugin for your browser if you want.
+
+`livereload` will reload on changes to the contents `dev`, and `gulp` will rerun the build process on changes to `src`.
 
 ### Ship
 
@@ -37,21 +55,3 @@ Invoking `gulp prod` from the command line will trigger the production build pro
 2. Minify
 3. Rename to whatever is listed in your `package.json` file as the name
 4. Crap out mini and non mini versions into dist
-
-### Turn off livereload
-
-    RELOAD=false gulp
-
-### Serve it on a different port
-
-    PORT=9001 gulp
-
-This boilerplate should pull in the newest version of `normalize.css` and the
-current stable relase of Skeleton.
-
-## TODO
-
-But on that last point, it doesn't yet. Currently, Skeleton is kept in `vendor/css`,
-kept up to date by hand.  Working on that via getting an NPM package put together.
-
-Noramlize in this project is kept up to date via the `normalize.css` NPM package.
