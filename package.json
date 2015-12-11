@@ -1,6 +1,6 @@
 {
-  "name": "bone-animated-header",
-  "version": "1.0.0",
+  "name": "bone-flex-header",
+  "version": "1.1.0",
   "license": "MIT",
   "description": "Header element that animates onscroll.",
   "scripts": {

@@ -14,11 +14,162 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="twelve columns">
-      <h1> Repurpose this file as your lab/sandbox for your Bone.</h1>
-    </div>
-  </div>
+  <header class="bone-flex-header header-fg">
+      <div class="bone-flex-header-inner container">
+          <h1 class="bone-flex-header-brand">Image Maybe?<span style="font-size: 20px;"> Easy to handle an h tag, anyway </span></h1>
+      </div>
+  </header>
+
+  <section>
+      <div class="container">
+          <div class="row">
+            <div class="twelve columns">
+              <h2> Repurpose this file as your lab/sandbox for your Bone.</h2>
+            </div>
+
+            <div class="eight columns">
+                <h3>Presently the door commenced</h3>
+                <p>"I see no other way, Ja," I said, "though I can assure you
+                that I would rather go to Sheol after Perry than to Phutra.
+                However, Perry is much too pious to make the probability at all
+                great that I should ever be called upon to rescue him from the
+                former locality."</p>
+
+                <p>Ja asked me what Sheol was, and when I explained, as best
+                I could, he said, "You are speaking of Molop Az, the flaming
+                sea upon which Pellucidar floats.  All the dead who are buried
+                in the ground go there. Piece by piece they are carried down to
+                Molop Az by the little demons who dwell there.  We know this
+                because when graves are opened we find that the bodies have
+                been partially or entirely borne off.  That is why we of Anoroc
+                place our dead in high trees where the birds may find them and
+                bear them bit by bit to the Dead World above the Land of Awful
+                Shadow.  If we kill an enemy we place his body in the ground
+                that it may go to Molop Az."</p>
+            </div>
+
+            <div class="four columns">
+                <img src="//unsplash.it/400/600" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="eight columns offset-by-two">
+                <p>Presently the door commenced to recede before me until it
+                had sunk into the wall fifty feet, then it stopped and slid
+                easily to the left, exposing a short, narrow corridor of
+                concrete, at the further end of which was another door, similar
+                in every respect to the one I had just passed.  No one was in
+                sight, yet immediately we passed the first door it slid gently
+                into place behind us and receded rapidly to its original
+                position in the front wall of the building.  As the door had
+                slipped aside I had noted its great thickness, fully twenty
+                feet, and as it reached its place once more after closing
+                behind us, great cylinders of steel had dropped from the
+                ceiling behind it and fitted their lower ends into apertures
+                countersunk in the floor.</p>
+
+                <p>A second and third door receded before me and slipped to one
+                side as the first, before I reached a large inner chamber where
+                I found food and drink set out upon a great stone table.
+                A voice directed me to satisfy my hunger and to feed my calot,
+                and while I was thus gaged my invisible host put me through
+                a severe and searching cross-examination.</p>
+
+                <p>"Your statements are most remarkable," said the voice, on
+                concluding its questioning, "but you are evidently speaking the
+                truth, and it is equally evident that you are not of Barsoom.
+                I can tell that by the conformation of your brain and the
+                strange location of your internal organs and the shape and size
+                of your heart."</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="twelve columns">
+                <img class="u-img-responsive" src="//unsplash.it/1200/500">
+            </div>
+        </div>
+      </div>
+  <section>
+
+  <script>
+
+      /**
+       *  Here's the behavior required by the bone, described as:
+       *  - query selector
+       *  - dom manipulator (a specific subset of this, being class manipulation)
+       */
+
+      window.onload = function () { // TODO is this cross browser for modern ones? mobile?
+
+          // TODO collision detection - ain't got none
+          window.bones = window.bones || {};
+          window.bones.flexHeader = _bFH = {};
+
+          // TODO move this down to init scope as options
+          _bFH.header = document.querySelector(".bone-flex-header");
+          _bFH.scrolling = false;
+          _bFH.transitionAt = 75;
+          _bFH.scrollTimout = 250;
+
+          // TODO these probably suck
+          _bFH.addClass = function (list, cls) {
+              var names = list.split(" ")
+
+              var index = names.indexOf(cls)
+
+              if (index === -1) {
+                  names.push(cls)
+              }
+
+              return names.join(" ")
+          }
+
+          _bFH.rmClass = function (list, cls) {
+              var names = list.split(" ")
+
+              var index = names.indexOf(cls)
+
+              if (index !== -1) {
+                  names.splice(index, 1)
+              }
+
+              return names.join(" ")
+          }
+
+          _bFH.init = function init () {
+              var self = this;
+              window.addEventListener("scroll", function (ev) {
+                  //console.log("scroll")
+                  if (!self.scrolling) {
+                      self.scrolling = true;
+                      setTimeout(self.setClass.bind(self), self.scrollTimeout);
+                  }
+              }, false)
+          }
+
+          _bFH.setClass = function () {
+              if (this.getYOffset() > this.transitionAt) {
+                  // TODO make the flex-active class optionally configured
+                  this.header.className = this.addClass(this.header.className, "bone-flex")
+              } else {
+                this.header.className = this.rmClass(this.header.className, "bone-flex")
+              }
+
+              this.scrolling = false
+          }
+
+          _bFH.getYOffset = function () {
+              var doc = document.documentElement // TODO cache this in init
+              var offset = window.pageYOffset || doc.scrollTop;
+              //console.log(offset)
+              return offset
+          }
+
+          _bFH.init()
+      }
+  </script>
 </body>
 
 </html>

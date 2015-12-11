@@ -1,1 +1,34 @@
-/* woo */
+body {
+    padding-top: 250px;
+}
+
+.header-fg {
+    background-color: #41451A;
+    color: white;
+}
+
+/* These classes are the Bone's CSS "API" */
+.bone-flex-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 250px;
+    transition: all 300ms ease;
+    /*overflow: hidden;*/
+}
+
+.bone-flex-header-brand {
+    line-height: 250px;
+}
+
+.bone-flex-header.bone-flex {
+    height: 100px;
+}
+
+.bone-flex-header.bone-flex .bone-flex-header-brand {
+    line-height: 100px;
+    font-size: 45px;
+}
+
+.bone-flex-header-inner {
+}
