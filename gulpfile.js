@@ -11,12 +11,12 @@ var moment = require('moment')
 var pkg = require('./package.json')
 
 var banner = ['/*!',
-  ' Skeleton Framework - Bone Template', // Rename me
+  ' <%= pkg.name %>',
   ' | v<%= pkg.version %>',
   ' | <%= pkg.license %>',
   ' | ' + moment().format("MMM Do, YYYY"),
   ' */',
-  '\n \n'
+  '\n\n'
 ].join('')
 
 var paths = {
