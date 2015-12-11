@@ -1,19 +1,32 @@
 {
+<<<<<<< HEAD
   "name": "bone-animated-header",
   "description": "Header element that animates onscroll.",
   "main": "dist/bone-animated-header.css",
   "author": "enlore <n.e.lorenson@gmail.com>",
+=======
+  "name": "bone-template",
+  "description": "A simple responsive framework for mobile friendly development.",
+  "main": "dist/skeleton.css",
+  "author": "your name here",
+>>>>>>> fe28200806939d2cbdd699cef8e7ad6c1f56d44f
   "license": "MIT",
   "keywords": [
     "css",
     "framework",
     "skeleton",
     "skeletonframework",
+<<<<<<< HEAD
     "bone",
     "nav",
     "animated"
   ],
   "homepage": "",
+=======
+    "bone"
+  ],
+  "homepage": "https://github.com/skeletonframework/bone-template",
+>>>>>>> fe28200806939d2cbdd699cef8e7ad6c1f56d44f
   "dependencies": {
     "normalize-css": "~3.0.3",
     "skeletonframework": "~1.0.3"
