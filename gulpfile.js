@@ -21,7 +21,11 @@ var banner = ['/*!',
 
 var paths = {
   css: {
-    src: "src/bone.css",
+    src: [
+      "src/bone.css",
+      "node_modules/normalize.css/normalize.css",
+      "node_modules/skeletonframework/dist/skeleton.css"
+    ],
     dist: "dist",
     dev: "dev/css"
   },
@@ -33,7 +37,7 @@ var paths = {
   //},
 
   html: {
-    src: "src/test.html",
+    src: "src/**/*.html",
     dev: "dev"
   },
 
@@ -89,13 +93,9 @@ var copyJS = function (options) {
 }
 
 function setLiveReload() {
-  // if we have a RELOAD thing set, use that
+  // if we have a RELOAD env variable set, use that
   // otherwise default to false
-  if (process.env.RELOAD) {
     return process.env.RELOAD === "true" ? true : false
-  } else {
-    return false
-  }
 }
 
 var useLiveReload = setLiveReload()
