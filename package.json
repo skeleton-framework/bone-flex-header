@@ -11,9 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/skeletonframework/bone-flex-header"
   },
-  "author": "enlore",
+  "author": {
+      "name": "Nick Lorenson",
+      "email": "n.e.lorenson@gmail.com"
+  },
   "devDependencies": {
     "autoprefixer-core": "^5.2.0",
     "gulp": "^3.9.0",
