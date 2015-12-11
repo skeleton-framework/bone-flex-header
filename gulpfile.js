@@ -115,6 +115,10 @@ gulp.task('watch', function () {
     gulp.watch(paths.watch, ['reload'])
 })
 
+function copyHTML (opts) {
+    gulp.src(opts.src).pipe(gulp.dest(opts.dest))
+}
+
 gulp.task('dev', function () {
   buildTask({
     src: paths.css.src,
