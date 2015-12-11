@@ -1,0 +1,30 @@
+{
+  "name": "bone-animated-header",
+  "description": "Header element that animates onscroll.",
+  "main": "dist/bone-animated-header.css",
+  "author": "enlore <n.e.lorenson@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "css",
+    "framework",
+    "skeleton",
+    "skeletonframework",
+    "bone",
+    "nav",
+    "animated"
+  ],
+  "homepage": "",
+  "dependencies": {
+    "normalize-css": "~3.0.3",
+    "skeletonframework": "~1.0.3"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src",
+    "gulpfile.js",
+    "package.json",
+    "README.md"
+  ]
+}
