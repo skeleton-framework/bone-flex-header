@@ -23,6 +23,7 @@ var paths = {
   css: {
     src: [
       "src/bone.css",
+      "src/example.css",
       "node_modules/normalize.css/normalize.css",
       "node_modules/skeletonframework/dist/skeleton.css"
     ],
