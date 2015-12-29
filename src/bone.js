@@ -6,14 +6,8 @@
 (function () { // TODO is this cross browser for modern ones? mobile?
     var _bFH = {};
 
-    // TODO move this down to init scope as options
-    _bFH.header = document.querySelector(".bone-flex-header");
-    _bFH.scrolling = false;
-    _bFH.transitionAt = 75;
-    _bFH.scrollTimout = 250;
-
     // TODO these probably suck
-    _bFH.addClass = function (list, cls) {
+    _bFH.addClass = function addClass (list, cls) {
         var names = list.split(" ")
 
         var index = names.indexOf(cls)
@@ -25,7 +19,7 @@
         return names.join(" ")
     }
 
-    _bFH.rmClass = function (list, cls) {
+    _bFH.rmClass = function rmClass (list, cls) {
         var names = list.split(" ")
 
         var index = names.indexOf(cls)
@@ -37,32 +31,38 @@
         return names.join(" ")
     }
 
+    _bFH.setClass = function setClass () {
+        if (this.getYOffset() > this.transitionAt) {
+            this.header.className = this.addClass(this.header.className, this.activeClass)
+        } else {
+            this.header.className = this.rmClass(this.header.className, this.activeClass)
+        }
+
+        this.scrolling = false
+    }
+
+    _bFH.getYOffset = function getYOffset () {
+        var offset = window.pageYOffset || this.doc.scrollTop;
+
+        return offset
+    }
+
     _bFH.init = function init () {
+        this.header       = document.querySelector(".bone-flex-header");
+        this.scrolling    = false;
+        this.transitionAt = 75;
+        this.scrollTimout = 250;
+        this.doc          = document.documentElement;
+        this.activeClass  = "bone-flex";
+
         var self = this;
+
         window.addEventListener("scroll", function (ev) { // TODO leaky if multiple init() calls?
             if (!self.scrolling) {
                 self.scrolling = true;
                 setTimeout(self.setClass.bind(self), self.scrollTimeout);
             }
         }, false)
-    }
-
-    _bFH.setClass = function () {
-        if (this.getYOffset() > this.transitionAt) {
-            // TODO make the flex-active class optionally configured
-            this.header.className = this.addClass(this.header.className, "bone-flex")
-        } else {
-            this.header.className = this.rmClass(this.header.className, "bone-flex")
-        }
-
-        this.scrolling = false
-    }
-
-    _bFH.getYOffset = function () {
-        var doc = document.documentElement // TODO cache this in init
-        var offset = window.pageYOffset || doc.scrollTop;
-        //console.log(offset)
-        return offset
     }
 
     _bFH.init()
