@@ -30,11 +30,11 @@ var paths = {
     dev: "dev/css"
   },
 
-  //js: {
-  //  src: "src/bone.js",
-  //  dist: "dist",
-  //  dev: "dev/js"
-  //},
+  js: {
+    src: "src/bone.js",
+    dist: "dist",
+    dev: "dev/js"
+  },
 
   html: {
     src: "src/**/*.html",
@@ -137,10 +137,10 @@ gulp.task('dev', function () {
   //  dest: paths.images.dev
   //})
 
-  //copyJS({
-  //  src: paths.js.src,
-  //  dest: paths.js.dev
-  //})
+  copyJS({
+    src: paths.js.src,
+    dest: paths.js.dev
+  })
 })
 
 gulp.task('reload', function () {
