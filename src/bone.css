@@ -1,3 +1,43 @@
+/* These classes are the Bone's CSS "API" and are actually intended to ship
+ * with the bone */
+.bone-flex-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    transition: all 300ms ease;
+    /*overflow: hidden;*/
+}
+
+.bone-flex-header-brand {
+    line-height: 100px;
+}
+
+.bone-flex-header-inner {}
+
+@media (min-width: 60em) {
+    .bone-flex-header {
+        height: 250px;
+    }
+
+    .bone-flex-header-brand {
+        line-height: 250px;
+    }
+
+    .bone-flex-header.bone-flex {
+        height: 100px;
+    }
+
+    .bone-flex-header.bone-flex .bone-flex-header-brand {
+        line-height: 100px;
+        font-size: 45px;
+    }
+}
+
+/* End Bone code */
+
+/* Everything else is here for the example code */
+
 body {
     padding-top: 250px;
 }
@@ -7,28 +47,14 @@ body {
     color: white;
 }
 
-/* These classes are the Bone's CSS "API" */
-.bone-flex-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 250px;
-    transition: all 300ms ease;
-    /*overflow: hidden;*/
+@media (max-width: 35em) {
+    .u-hidden-xs { display: none !important; }
 }
 
-.bone-flex-header-brand {
-    line-height: 250px;
+@media (min-width: 35em) and (max-width: 45em) {
+    .u-hidden-sm { display: none !important; }
 }
 
-.bone-flex-header.bone-flex {
-    height: 100px;
-}
-
-.bone-flex-header.bone-flex .bone-flex-header-brand {
-    line-height: 100px;
-    font-size: 45px;
-}
-
-.bone-flex-header-inner {
+@media (min-width: 45em) and (max-width: 60em) {
+    .u-hidden-md { display: none !important; }
 }
