@@ -33,28 +33,4 @@
         font-size: 45px;
     }
 }
-
 /* End Bone code */
-
-/* Everything else is here for the example code */
-
-body {
-    padding-top: 250px;
-}
-
-.header-fg {
-    background-color: #41451A;
-    color: white;
-}
-
-@media (max-width: 35em) {
-    .u-hidden-xs { display: none !important; }
-}
-
-@media (min-width: 35em) and (max-width: 45em) {
-    .u-hidden-sm { display: none !important; }
-}
-
-@media (min-width: 45em) and (max-width: 60em) {
-    .u-hidden-md { display: none !important; }
-}
