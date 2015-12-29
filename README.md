@@ -21,7 +21,8 @@ The basic class structure is as follows:
       </div>
     </header>
 
-The header is set up to have a height of 250px.
+The header is set up to have a height of 250px and to squeeze down to 100px at
+a scroll position of 75px.
 
 ## WIP
 
