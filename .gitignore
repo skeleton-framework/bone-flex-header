@@ -140,3 +140,4 @@ crashlytics-build.properties
 ### Skeleton Framework dev files
 dev
 dist
+.editorconfig
